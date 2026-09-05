@@ -8,7 +8,7 @@ Update this file whenever the current phase, active feature, or implementation s
 
 ## Current Goal
 
-- Wire Clerk into the app, protect routes by default, and add the sign-in/sign-up flow and editor user menu.
+- Implement the editor home screen and project dialogs with mock project state, including sidebar actions and mobile close behavior.
 
 ## Completed
 
@@ -30,6 +30,10 @@ Update this file whenever the current phase, active feature, or implementation s
 - Added sign-in and sign-up pages with the required two-panel auth layout and minimal dark styling.
 - Added the authenticated redirect flow from `/` to `/editor` and unauthenticated redirect to `/sign-in`.
 - Added the Clerk `UserButton` to the editor navbar for profile settings and logout.
+- Added a reusable `useProjectDialogs` hook with mock project state and slug generation.
+- Added the editor home empty state with the `New Project` CTA and the `Create Project` dialog.
+- Added sidebar project actions for owned projects: rename and delete, with shared projects hidden from action controls.
+- Added mobile sidebar scrim/backdrop behavior and project dialog wiring without persistence or API calls.
 - Verified the production build passes with the final Clerk integration.
 
 ## In Progress
@@ -38,7 +42,7 @@ Update this file whenever the current phase, active feature, or implementation s
 
 ## Next Up
 
-- Proceed with the next feature after the verified auth flow.
+- Proceed with the next feature after the verified editor project dialog flow.
 
 ## Open Questions
 

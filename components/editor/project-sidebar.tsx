@@ -1,14 +1,19 @@
 "use client";
 
-import { FolderOpen, Plus, X } from "lucide-react";
+import { FolderOpen, PencilLine, Plus, Trash2, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
+import type { ProjectItem } from "./use-project-dialogs";
+
 interface ProjectSidebarProps {
   isOpen: boolean;
   onClose: () => void;
-  onNewProject?: () => void;
+  projectItems: ProjectItem[];
+  onCreateProject?: () => void;
+  onRenameProject?: (project: ProjectItem) => void;
+  onDeleteProject?: (project: ProjectItem) => void;
 }
 
 function EmptyProjectState() {
@@ -23,8 +28,14 @@ function EmptyProjectState() {
 export function ProjectSidebar({
   isOpen,
   onClose,
-  onNewProject,
+  projectItems,
+  onCreateProject,
+  onRenameProject,
+  onDeleteProject,
 }: ProjectSidebarProps) {
+  const ownedProjects = projectItems.filter((project) => project.isOwner);
+  const sharedProjects = projectItems.filter((project) => !project.isOwner);
+
   return (
     <aside
       aria-label="Project sidebar"
@@ -52,17 +63,74 @@ export function ProjectSidebar({
           <TabsTrigger value="my-projects">My Projects</TabsTrigger>
           <TabsTrigger value="shared">Shared</TabsTrigger>
         </TabsList>
-        <TabsContent value="my-projects">
-          <EmptyProjectState />
+
+        <TabsContent value="my-projects" className="mt-4 space-y-2">
+          {ownedProjects.length === 0 ? (
+            <EmptyProjectState />
+          ) : (
+            ownedProjects.map((project) => (
+              <div
+                key={project.id}
+                className="flex items-center justify-between rounded-xl border border-surface-border bg-bg-base px-3 py-2.5"
+              >
+                <div className="min-w-0 flex-1">
+                  <p className="truncate text-sm font-medium text-copy-primary">
+                    {project.name}
+                  </p>
+                  <p className="truncate text-xs text-copy-muted">
+                    /{project.slug}
+                  </p>
+                </div>
+
+                <div className="ml-2 flex items-center gap-1">
+                  <Button
+                    aria-label={`Rename ${project.name}`}
+                    onClick={() => onRenameProject?.(project)}
+                    size="icon-xs"
+                    variant="ghost"
+                    type="button"
+                  >
+                    <PencilLine className="h-3.5 w-3.5" />
+                  </Button>
+                  <Button
+                    aria-label={`Delete ${project.name}`}
+                    onClick={() => onDeleteProject?.(project)}
+                    size="icon-xs"
+                    variant="ghost"
+                    type="button"
+                  >
+                    <Trash2 className="h-3.5 w-3.5" />
+                  </Button>
+                </div>
+              </div>
+            ))
+          )}
         </TabsContent>
-        <TabsContent value="shared">
-          <EmptyProjectState />
+
+        <TabsContent value="shared" className="mt-4 space-y-2">
+          {sharedProjects.length === 0 ? (
+            <EmptyProjectState />
+          ) : (
+            sharedProjects.map((project) => (
+              <div
+                key={project.id}
+                className="rounded-xl border border-surface-border bg-bg-base px-3 py-2.5"
+              >
+                <p className="truncate text-sm font-medium text-copy-primary">
+                  {project.name}
+                </p>
+                <p className="truncate text-xs text-copy-muted">
+                  /{project.slug}
+                </p>
+              </div>
+            ))
+          )}
         </TabsContent>
       </Tabs>
 
       <div className="shrink-0 border-t border-surface-border p-3">
-        <Button className="w-full" onClick={onNewProject}>
-          <Plus />
+        <Button className="w-full" onClick={onCreateProject} type="button">
+          <Plus className="mr-2 h-4 w-4" />
           New Project
         </Button>
       </div>

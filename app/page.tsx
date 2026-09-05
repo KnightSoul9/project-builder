@@ -1,7 +1,16 @@
+"use client";
+
+import { EditorLayout } from "@/components/editor/editor-layout";
+
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <h1 className="text-3xl font-bold">Welcome to the Home Page</h1>
-    </div>
+    <EditorLayout>
+      <section
+        aria-label="Editor canvas"
+        className="flex flex-1 items-center justify-center"
+      >
+        <p className="text-sm text-copy-muted">Editor canvas</p>
+      </section>
+    </EditorLayout>
   );
 }

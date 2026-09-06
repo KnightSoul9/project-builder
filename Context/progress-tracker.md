@@ -4,11 +4,11 @@ Update this file whenever the current phase, active feature, or implementation s
 
 ## Current Phase
 
-- Authentication
+- Prisma data layer
 
 ## Current Goal
 
-- Implement the editor home screen and project dialogs with mock project state, including sidebar actions and mobile close behavior.
+- Add the project database models and Prisma client foundation.
 
 ## Completed
 
@@ -35,6 +35,9 @@ Update this file whenever the current phase, active feature, or implementation s
 - Added sidebar project actions for owned projects: rename and delete, with shared projects hidden from action controls.
 - Added mobile sidebar scrim/backdrop behavior and project dialog wiring without persistence or API calls.
 - Verified the production build passes with the final Clerk integration.
+- Added the Project and ProjectCollaborator Prisma models with the required relations, indexes, and constraints.
+- Added the cached Prisma 7 client singleton with direct PostgreSQL and Accelerate connection branches.
+- Created and applied the initial Prisma migration and verified the production build passes.
 
 ## In Progress
 
@@ -42,7 +45,7 @@ Update this file whenever the current phase, active feature, or implementation s
 
 ## Next Up
 
-- Proceed with the next feature after the verified editor project dialog flow.
+- Proceed with the next feature after the verified Prisma data layer.
 
 ## Open Questions
 
@@ -56,4 +59,4 @@ Update this file whenever the current phase, active feature, or implementation s
 
 ## Session Notes
 
-- The editor chrome is complete and the app is now being wired for authenticated route protection and Clerk-based login flows.
+- The project database foundation is ready for authenticated project persistence.

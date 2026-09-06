@@ -5,7 +5,7 @@ import { FolderOpen, PencilLine, Plus, Trash2, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-import type { ProjectItem } from "./use-project-dialogs";
+import type { ProjectItem } from "@/hooks/use-project-actions";
 
 interface ProjectSidebarProps {
   isOpen: boolean;

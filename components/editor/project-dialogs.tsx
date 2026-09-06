@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 
-import type { ProjectItem } from "./use-project-dialogs";
+import type { ProjectItem } from "@/hooks/use-project-actions";
 
 interface ProjectDialogsProps {
   dialog: {
@@ -23,6 +23,7 @@ interface ProjectDialogsProps {
   formName: string;
   formSlug: string;
   loading: boolean;
+  error: string | null;
   onClose: () => void;
   onChangeName: (value: string) => void;
   onCreate: () => void;
@@ -35,6 +36,7 @@ export function ProjectDialogs({
   formName,
   formSlug,
   loading,
+  error,
   onClose,
   onChangeName,
   onCreate,
@@ -94,6 +96,7 @@ export function ProjectDialogs({
               </p>
               <p className="mt-1 text-sm text-copy-primary">/{formSlug}</p>
             </div>
+            {error && <p className="text-sm text-destructive">{error}</p>}
           </div>
 
           <DialogFooter>
@@ -155,6 +158,7 @@ export function ProjectDialogs({
               </p>
               <p className="mt-1 text-sm text-copy-primary">/{formSlug}</p>
             </div>
+            {error && <p className="text-sm text-destructive">{error}</p>}
           </div>
 
           <DialogFooter>
@@ -189,6 +193,8 @@ export function ProjectDialogs({
               permanently deleted.
             </DialogDescription>
           </DialogHeader>
+
+          {error && <p className="text-sm text-destructive">{error}</p>}
 
           <DialogFooter>
             <Button variant="outline" onClick={onClose} type="button">

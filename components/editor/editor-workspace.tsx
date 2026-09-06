@@ -3,27 +3,34 @@
 import { Plus } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import {
+  useProjectActions,
+  type ProjectItem,
+} from "@/hooks/use-project-actions";
 
 import { EditorLayout } from "./editor-layout";
-import { useProjectDialogs } from "./use-project-dialogs";
 import { ProjectDialogs } from "./project-dialogs";
 
-export function EditorWorkspace() {
+interface EditorWorkspaceProps {
+  projects: ProjectItem[];
+}
+
+export function EditorWorkspace({ projects }: EditorWorkspaceProps) {
   const {
-    projects,
     dialog,
     formName,
     setFormName,
     formSlug,
     loading,
+    error,
     openCreateDialog,
     openRenameDialog,
     openDeleteDialog,
     closeDialog,
-    handleCreateProject,
-    handleRenameProject,
-    handleDeleteProject,
-  } = useProjectDialogs();
+    createProject,
+    renameProject,
+    deleteProject,
+  } = useProjectActions();
 
   return (
     <>
@@ -58,11 +65,12 @@ export function EditorWorkspace() {
         formName={formName}
         formSlug={formSlug}
         loading={loading}
+        error={error}
         onClose={closeDialog}
         onChangeName={setFormName}
-        onCreate={handleCreateProject}
-        onRename={handleRenameProject}
-        onDelete={handleDeleteProject}
+        onCreate={createProject}
+        onRename={renameProject}
+        onDelete={deleteProject}
       />
     </>
   );

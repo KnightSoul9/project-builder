@@ -5,7 +5,7 @@ import { useState, type ReactNode } from "react";
 import { EditorNavbar } from "@/components/editor/editor-navbar";
 import { ProjectSidebar } from "@/components/editor/project-sidebar";
 
-import type { ProjectItem } from "./use-project-dialogs";
+import type { ProjectItem } from "@/hooks/use-project-actions";
 
 interface EditorLayoutProps {
   children: ReactNode;

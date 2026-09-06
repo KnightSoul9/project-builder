@@ -8,11 +8,11 @@ if (!databaseUrl) {
   throw new Error("DATABASE_URL is not configured");
 }
 
-const createPrismaClient = () => {
+const createPrismaClient = (): PrismaClient => {
   if (databaseUrl.startsWith("prisma+postgres://")) {
     return new PrismaClient({ accelerateUrl: databaseUrl }).$extends(
       withAccelerate(),
-    );
+    ) as unknown as PrismaClient;
   }
 
   const adapter = new PrismaPg({ connectionString: databaseUrl });

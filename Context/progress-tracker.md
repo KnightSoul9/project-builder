@@ -38,14 +38,22 @@ Update this file whenever the current phase, active feature, or implementation s
 - Added the Project and ProjectCollaborator Prisma models with the required relations, indexes, and constraints.
 - Added the cached Prisma 7 client singleton with direct PostgreSQL and Accelerate connection branches.
 - Created and applied the initial Prisma migration and verified the production build passes.
+- Added authenticated project list/create API routes and owner-checked rename/delete API routes.
+- Added explicit `401`, `403`, `404`, and input validation responses for project mutations.
+- Updated the Clerk middleware boundary so project API handlers can return `401` responses directly.
+- Verified the production build passes with the project API routes registered.
+- Added server-side owned/shared project loading for the editor home.
+- Added API-backed create, rename, and delete project actions with aligned room/project IDs and workspace navigation.
+- Wired real project data and mutation dialogs into the editor home sidebar.
+- Verified TypeScript and lint pass for the editor home wiring.
 
 ## In Progress
 
-- None.
+- Verify the complete production build after editor home wiring.
 
 ## Next Up
 
-- Proceed with the next feature after the verified Prisma data layer.
+- Proceed with the next feature after the verified editor home wiring.
 
 ## Open Questions
 

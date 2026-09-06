@@ -24,6 +24,7 @@ const isPublicRoute = createRouteMatcher([
   "/",
   signInPath,
   signUpPath,
+  "/api/projects(.*)",
   "/sign-in(.*)",
   "/sign-up(.*)",
 ]);
